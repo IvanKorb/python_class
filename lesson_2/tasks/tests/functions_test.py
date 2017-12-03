@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from lesson_2.tasks import functions as f
+from lesson_2.tasks import functions_task as f
 
 
 class FunctionsTest(TestCase):
@@ -21,13 +21,17 @@ class FunctionsTest(TestCase):
         result = f.get_min_with_one_or_more_arguments(first, *array)
         self.assertEqual(12, result)
 
+    def test_get_min_with_many_arguments(self):
+        result = f.get_min_with_many_arguments(1, 2, 3, 4)
+        self.assertEqual(1, result)
+
     def test_get_min_bounded(self):
         kwargs = {
             'low': 0,
             'high': 127
         }
-        result = f.get_min_bounded([-54, 45, 23], **kwargs)
-        self.assertEqual(0, result)
+        result = f.get_min_bounded(-54, 45, 23, **kwargs)
+        self.assertEqual(23, result)
 
     def test_make_min(self):
         bounded_min = f.make_min(low=0, high=255)
@@ -35,4 +39,4 @@ class FunctionsTest(TestCase):
 
         if callable(bounded_min):
             result = bounded_min(-5, 12, 13)
-            self.assertEqual(0, result)
+            self.assertEqual(12, result)
